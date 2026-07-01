@@ -1,4 +1,4 @@
-interface Comic {
+export interface Comic {
   id: number;
   title: string;
   author: string;
@@ -10,7 +10,10 @@ interface Comic {
   status: string;
   summary: string;
   tags: string[];
+  read: string;
   image: string;
+  created_at: Date;
+  updated_at: Date;
 }
 
 interface Message {

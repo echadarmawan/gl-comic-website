@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { CatLogo } from "./CatLogo";
 import { SparkleIcon } from "./SparkleIcon";
 import { Sun, X, Moon, BookOpen } from "lucide-react";
@@ -12,6 +12,11 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border">
@@ -59,10 +64,10 @@ export function Navbar() {
             className="ml-2 p-2 rounded-full border border-border hover:bg-muted transition-colors cursor-pointer"
             title="Toggle dark mode"
           >
-            {theme === "dark"
+            {mounted && (theme === "dark"
               ? <Sun size={16} className="text-primary" />
               : <Moon size={16} className="text-primary" />
-            }
+            )}
           </button>
         </nav>
 

@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { CatLogo } from "./CatLogo";
 import { SparkleIcon } from "./SparkleIcon";
 import { BookOpen } from "lucide-react";
 
-export function HomePage({ setPage }: { setPage: (p: Page) => void }) {
+// export function HomePage({ setPage }: { setPage: (p: Page) => void })
+export function HomePage() {
   return (
     <main className="flex-1 flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] px-4 text-center">
       <div className="relative mb-6">
@@ -21,20 +23,20 @@ export function HomePage({ setPage }: { setPage: (p: Page) => void }) {
         Temukan ribuan komik Girls Love — manga, manhwa, manhua — dalam satu perpustakaan yang cantik dan mudah ditelusuri.
       </p>
       <div className="flex flex-col sm:flex-row gap-3">
-        <button
-          onClick={() => setPage("comics")}
+        <Link
+          href="/comics"
           className="px-8 py-3 rounded-full bg-primary text-white font-bold text-base hover:bg-primary/90 shadow-lg shadow-primary/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
         >
           <BookOpen size={18} />
           Jelajahi Komik
-        </button>
-        <button
-          onClick={() => setPage("chatbot")}
+        </Link>
+        <Link
+          href="/chatbot"
           className="px-8 py-3 rounded-full border-2 border-primary text-primary font-bold text-base hover:bg-primary/10 transition-all flex items-center gap-2 cursor-pointer"
         >
           <SparkleIcon size={18} className="text-primary" />
           Tanya ComBot
-        </button>
+        </Link>
       </div>
 
       <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg w-full">

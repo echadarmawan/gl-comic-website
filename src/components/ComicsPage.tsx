@@ -1,14 +1,18 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { COMICS } from "@/data/comics";
 import { Home, ChevronRight, Search, X, BookOpen } from "lucide-react";
 import { ComicCard } from "./ComicCard";
 import { Pagination } from "./Pagination";
 import { ComicModal } from "./ComicModal";
+import Link from "next/link";
 
 const ITEMS_PER_PAGE = 20;
 
-export function ComicsPage({ setPage }: { setPage: (p: Page) => void }) {
+interface ComicsPageProps {
+  comics: Comic[];
+}
+
+export function ComicsPage({ comics }: ComicsPageProps) {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [searchBy, setSearchBy] = useState<"title" | "author">("title");
@@ -18,15 +22,15 @@ export function ComicsPage({ setPage }: { setPage: (p: Page) => void }) {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
+  // useEffect(() => {
+  //   const handler = (e: MouseEvent) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+  //       setDropdownOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener("mousedown", handler);
+  //   return () => document.removeEventListener("mousedown", handler);
+  // }, []);
 
   const handleSearch = useCallback((val: string) => {
     setSearch(val);
@@ -37,10 +41,14 @@ export function ComicsPage({ setPage }: { setPage: (p: Page) => void }) {
     }, 300);
   }, []);
 
-  const filtered = COMICS.filter((c) => {
+  const filtered = comics.filter((c) => {
     const q = debouncedSearch.toLowerCase();
+
     if (!q) return true;
-    if (searchBy === "author") return c.author.toLowerCase().includes(q);
+
+    if (searchBy === "author")
+      return c.author.toLowerCase().includes(q);
+
     return c.title.toLowerCase().includes(q);
   });
 
@@ -53,9 +61,12 @@ export function ComicsPage({ setPage }: { setPage: (p: Page) => void }) {
     <>
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 flex-1">
         <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6 bg-card border border-border rounded-lg px-4 py-2.5">
-          <button onClick={() => setPage("home")} className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
+          <Link href="/" className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
             <Home size={14} /> Home
-          </button>
+          </Link>
+          {/* <button onClick={() => setPage("home")} className="hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
+            <Home size={14} /> Home
+          </button> */}
           <ChevronRight size={14} />
           <span className="text-foreground font-semibold">All Comics</span>
         </nav>
@@ -125,4 +136,4 @@ export function ComicsPage({ setPage }: { setPage: (p: Page) => void }) {
       {selectedComic && <ComicModal comic={selectedComic} onClose={() => setSelectedComic(null)} />}
     </>
   );
-}
+};

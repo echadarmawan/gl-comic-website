@@ -10,7 +10,7 @@ export function ComicCard({ comic, onClick }: { comic: Comic; onClick: () => voi
         <p className="font-bold text-sm text-foreground line-clamp-2 leading-tight">{comic.title}</p>
         <p className="text-xs text-muted-foreground line-clamp-1">{comic.author}</p>
         <div className="flex flex-wrap gap-1">
-          {comic.genres.slice(0, 2).map((g) => (
+          {comic.genres.slice(0, 3).map((g) => (
             <span key={g} className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent text-accent-foreground font-medium border border-primary/15">
               {g}
             </span>

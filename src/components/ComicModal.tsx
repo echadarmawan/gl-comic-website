@@ -46,6 +46,7 @@ export function ComicModal({ comic, onClose }: { comic: Comic; onClose: () => vo
                   { label: "Status", value: comic.status },
                   { label: "Genre", value: comic.genres.join(", ") },
                   { label: "Tags", value: comic.tags.slice(0, 4).join(", ") },
+                  { label: "Where to Read", value: comic.read },
                 ].map(({ label, value }) => (
                   <div key={label}>
                     <span className="font-bold text-foreground">{label}</span>
