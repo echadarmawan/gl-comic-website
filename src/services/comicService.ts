@@ -8,7 +8,7 @@ export async function getComics() {
       .order("title");
 
   console.log("data: ", data);
-  console.log("error: ", error)
+  // console.log("error: ", error);
   
   if (error) throw error;
 

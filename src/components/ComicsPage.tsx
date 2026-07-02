@@ -1,10 +1,13 @@
 "use client";
+
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Home, ChevronRight, Search, X, BookOpen } from "lucide-react";
+import Link from "next/link";
+
 import { ComicCard } from "./ComicCard";
 import { Pagination } from "./Pagination";
 import { ComicModal } from "./ComicModal";
-import Link from "next/link";
+import type { Comic } from "@/types/Comic";
 
 const ITEMS_PER_PAGE = 20;
 

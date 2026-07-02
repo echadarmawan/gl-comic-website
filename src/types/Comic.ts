@@ -12,14 +12,6 @@ export interface Comic {
   tags: string[];
   read: string;
   image: string;
-  created_at: Date;
-  updated_at: Date;
+  // created_at: Date;
+  // updated_at: Date;
 }
-
-interface Message {
-  id: string;
-  role: "user" | "bot";
-  content: string;
-}
-
-type Page = "home" | "comics" | "chatbot";
