@@ -1,29 +1,26 @@
 import { Comic } from "@/types/Comic";
 
 export function buildCombinedText(comic: Comic): string {
+  const genres = Array.isArray(comic.genres)
+    ? comic.genres.join(", ")
+    : comic.genres;
+
+  const tags = Array.isArray(comic.tags)
+    ? comic.tags.join(", ")
+    : comic.tags;
+
   return `
-Title: ${comic.title}
+"${comic.title}" is a ${comic.type} created by ${comic.author} and illustrated by ${comic.artist}.
 
-Author: ${comic.author}
+It belongs to the genres: ${genres}.
 
-Artist: ${comic.artist}
+The comic was released in ${comic.release} and is currently ${comic.status}. It has ${comic.chapters} chapters.
 
-Genres: ${comic.genres}
+Synopsis:
+${comic.summary}
 
-Type: ${Array.isArray(comic.genres) ? comic.genres.join(", ") : comic.genres}
+Important themes and keywords include: ${tags}.
 
-Chapters: ${comic.chapters}
-
-Release: ${comic.release}
-
-Status: ${comic.status}
-
-Summary: ${comic.summary}
-
-Tags: ${Array.isArray(comic.tags) ? comic.tags.join(", ") : comic.tags}
-
-Read on: ${comic.read}
-
-Image: ${comic.image}
+This comic can be read on ${comic.read}.
 `.trim();
 }

@@ -70,6 +70,7 @@ export async function syncComics() {
         tags: comic.tags.join(", "),
         combined_text: combinedText,
         embedding,
+        updated_at: new Date().toISOString(),
       })
       .eq("id", comic.id);
 
